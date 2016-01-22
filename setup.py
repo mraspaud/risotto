@@ -28,13 +28,14 @@ from Cython.Build import cythonize
 
 setup(
     name='risotto',
-    version='0.0.2',
+    version='0.0.3',
     description="Rice aka USES aka SZIP decoder in Python/Cython",
     author='Martin Raspaud',
     author_email='martin.raspaud@smhi.se',
     url="https://github.com/mraspaud/risotto",
     ext_modules=cythonize("risotto/_risotto.pyx"),
     packages=['risotto'],
+    install_requires=['numpy', 'cython'],
     classifiers=["Development Status :: 4 - Beta",
                  "Intended Audience :: Science/Research",
                  "License :: OSI Approved :: GNU General Public License v3 " +
