@@ -24,7 +24,21 @@
 """
 
 from setuptools import setup
-from Cython.Build import cythonize
+from distutils.extension import Extension
+import os
+
+try:
+    from Cython.Build import cythonize
+    ext = '.pyx'
+    USE_CYTHON = True
+except ImportError:
+    ext = '.c'
+    USE_CYTHON = False
+
+extensions = [Extension("risotto", [os.path.join("risotto/_risotto"+ext)])]
+
+if USE_CYTHON:
+    extensions = cythonize(extensions)
 
 setup(
     name='risotto',
@@ -33,9 +47,9 @@ setup(
     author='Martin Raspaud',
     author_email='martin.raspaud@smhi.se',
     url="https://github.com/mraspaud/risotto",
-    ext_modules=cythonize("risotto/_risotto.pyx"),
+    ext_modules=extensions,
     packages=['risotto'],
-    install_requires=['numpy', 'cython'],
+    install_requires=['numpy'],
     classifiers=["Development Status :: 4 - Beta",
                  "Intended Audience :: Science/Research",
                  "License :: OSI Approved :: GNU General Public License v3 " +
