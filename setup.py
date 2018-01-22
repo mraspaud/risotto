@@ -35,7 +35,7 @@ except ImportError:
     ext = '.c'
     USE_CYTHON = False
 
-extensions = [Extension("risotto", [os.path.join("risotto/_risotto"+ext)])]
+extensions = [Extension("risotto._risotto", [os.path.join("risotto/_risotto"+ext)])]
 
 if USE_CYTHON:
     extensions = cythonize(extensions)
